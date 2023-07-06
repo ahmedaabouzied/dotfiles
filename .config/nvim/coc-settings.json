@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "description": "Configuration file for coc.nvim",
+  "additionalProperties": true,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod"
+      ],
+      "trace.server": "verbose",
+      "filetypes": [
+        "go"
+      ],
+      "execArgv": [
+        "--nolazy",
+        "--inspect-brk=6045"
+      ]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": [
+        "dockerfile"
+      ],
+      "args": [
+        "--stdio"
+      ]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": [
+        "start"
+      ],
+      "filetypes": [
+        "sh"
+      ],
+      "ignoredRootPaths": [
+        "~"
+      ]
+    }
+  },
+  "tslint.configFile": "tslint.json",
+  "tslint.enable": true,
+  "tslint.autoFixOnSave": true,
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": true,
+  "coc.preferences.echodocSupport": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "rust",
+    "py",
+    "md",
+    "rs",
+    "tsx",
+    "cpp",
+    "go",
+    "scss",
+    "css",
+    "json",
+    "ts"
+  ],
+  "suggest.enablePreview": true,
+  "suggest.floatEnable": true
+}
