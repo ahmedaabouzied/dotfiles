@@ -1,0 +1,9 @@
+inherits = "dracula_at_night"
+
+# Override the theming for "background":
+"ui.background" = "black"
+"ui.foreground" = "white"
+
+
+# Override colors in the palette:
+[palette]
