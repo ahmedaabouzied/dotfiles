@@ -81,7 +81,6 @@ local lsp_flags = {
     -- This is the default in Nvim 0.7+
     debounce_text_changes = 150,
     format = true,
-
 }
 
 -- Launguage Servers
@@ -144,6 +143,26 @@ require'lspconfig'.rust_analyzer.setup{
     },
     on_attach = on_attach,
 }
-require'lspconfig'.golangci_lint_ls.setup{}
 require'lspconfig'.asm_lsp.setup{}
 require'lspconfig'.bufls.setup{}
+require'lspconfig'.clangd.setup{
+    cmd = { "clangd" },
+    filetypes = { "c", "cpp", "objc", "objcpp", "h", "hpp" },
+    root_dir = require'lspconfig'.util.root_pattern(
+        "compile_commands.json",
+        "binding.gyp",
+        ".git"
+    ),
+    init_options = {
+        compilationDatabaseDirectory = "build",
+        includeDirectories = { "include" },
+    },
+    settings = {
+        clangd = {
+            -- Add any project-specific settings here
+        }
+    }
+}
+
+-- Key mapping for code actions
+vim.api.nvim_set_keymap('n', '<leader>c', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true, silent = true})
