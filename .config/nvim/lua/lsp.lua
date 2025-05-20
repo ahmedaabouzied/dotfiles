@@ -6,9 +6,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
-local split_definition = function(bufopts)
-end
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -32,13 +29,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', 'gf', vim.lsp.buf.formatting, bufopts)
-    vim.api.nvim_create_user_command(
-        'SplitDef',
-        split_definition,
-        {bang = true}
-        )
-
+    vim.keymap.set('n', 'gf', function() vim.lsp.buf.format() end, bufopts)
 
 end
 

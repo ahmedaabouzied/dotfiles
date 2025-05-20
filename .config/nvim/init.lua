@@ -49,8 +49,6 @@ require("lazy").setup({
                 vim.cmd.colorscheme('yugen')
             end,
         },
-
-
         { 
             'olivercederborg/poimandres.nvim',
             lazy = false,
@@ -68,6 +66,51 @@ require("lazy").setup({
                     vim.cmd("colorscheme poimandres")
                 end
             },
+            {
+                "vague2k/vague.nvim",
+                config = function()
+                end
+            },
+            {
+                "catppuccin/nvim",
+                name = "catppuccin",
+                priority = 1000,
+                opts = {
+                    no_italic = true,
+                    term_colors = true,
+                    transparent_background = false,
+                    styles = {
+                        comments = {},
+                        conditionals = {},
+                        loops = {},
+                        functions = {},
+                        keywords = {},
+                        strings = {},
+                        variables = {},
+                        numbers = {},
+                        booleans = {},
+                        properties = {},
+                        types = {},
+                    },
+                    color_overrides = {
+                        mocha = {
+                            base = "#000000",
+                            mantle = "#000000",
+                            crust = "#000000",
+                        },
+                    },
+                    integrations = {
+                        telescope = {
+                            enabled = true,
+                            style = "nvchad",
+                        },
+                        dropbar = {
+                            enabled = true,
+                            color_mode = true,
+                        },
+                    },
+                },
+            },
 
             -- Buffer line
             {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
@@ -76,6 +119,13 @@ require("lazy").setup({
             {
                 'nvim-lualine/lualine.nvim',
                 dependencies = { 'nvim-tree/nvim-web-devicons' }
+            },
+            {
+                "lukas-reineke/indent-blankline.nvim",
+                main = "ibl",
+                ---@module "ibl"
+                ---@type ibl.config
+                opts = {},
             },
 
             -- File navigation and utilities
@@ -105,21 +155,35 @@ require("lazy").setup({
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
+            {
+                "nvim-treesitter/nvim-treesitter",
+                build = ":TSUpdate",
+                config = function () 
+                    local configs = require("nvim-treesitter.configs")
+
+                    configs.setup({
+                            ensure_installed = { "c", "lua", "javascript", "html", "go", "rust" },
+                            sync_install = false,
+                            highlight = { enable = true },
+                            indent = { enable = true },  
+                        })
+                end
+            },
 
             -- Code review
             "junkblocker/patchreview-vim",
             "codegram/vim-codereview",
-
             -- AI 
             {
                 'Exafunction/codeium.vim',
                 event = 'BufEnter'
             },
-        })
+        }) -- End lazy.nvim
+
 
     -- Colors and highlighting
     vim.cmd('syntax on')
-    vim.cmd.colorscheme('yugen')
+    vim.cmd.colorscheme('catppuccin')
     vim.opt.termguicolors = true
 
     -- General settings
@@ -146,6 +210,7 @@ require("lazy").setup({
     vim.opt.title = true
     vim.opt.splitbelow = true
     vim.opt.splitright = true
+    vim.opt.winborder = "rounded"
 
     -- NERDTree settings
     vim.g.NERDTreeShowHidden = 1

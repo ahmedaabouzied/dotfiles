@@ -8,3 +8,11 @@ vim.api.nvim_create_user_command(
     fold_indent,
     {bang = true}
     )
+
+vim.cmd([[
+command! LspFormat lua vim.lsp.buf.format()
+]])
+
+
+-- Optional: You can also define a keymapping here if you haven't already
+-- vim.keymap.set('n', '<leader>lf', '<cmd>LspFormat<cr>', { desc = 'Format code' })
